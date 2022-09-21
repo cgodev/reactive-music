@@ -1,4 +1,6 @@
-const Track = ({ thumbnail = "/assets/images/dummytrack.jpg", name = "no name", author = "no author", genre = "no genre", type }) => {
+import AddToPlaylist from "./AddToPlaylist";
+
+const Track = ({ thumbnail = "/assets/images/dummytrack.jpg", name = "no name", author = "no author", genre = "no genre", type, trackUri = "" }) => {
     return <a href="#" className="text-decoration-none text-black">
         <div className="card mb-3" style={{ "maxWidth": "540px" }}>
             <div className="row g-0">
@@ -12,6 +14,7 @@ const Track = ({ thumbnail = "/assets/images/dummytrack.jpg", name = "no name", 
                         <p className="card-text">
                             <small className="badge bg-primary">Genre: { genre }</small>
                         </p>
+                        <AddToPlaylist trackUri={trackUri}/>
                     </div>
                 </div>
             </div>

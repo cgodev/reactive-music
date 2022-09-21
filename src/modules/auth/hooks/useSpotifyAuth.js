@@ -7,7 +7,8 @@ const useSpotifyAuth = () => {
             client_id: config.clientId,
             response_type: config.responseType,
             redirect_uri: config.redirectUrl,
-            show_dialog: config.showDialog
+            show_dialog: config.showDialog,
+            scope: "playlist-modify-public"
         });
     
         const popup = window.open(`${config.baseUrl}/authorize?${params}`, "Login", "width=400, height=600");
