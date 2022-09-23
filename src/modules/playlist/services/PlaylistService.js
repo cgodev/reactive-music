@@ -27,10 +27,10 @@ const createPlaylist = async(userId,playlistData) => {
             }
         }
     );
-    console.log(`Response ${JSON.stringify(response)}`);
+    //console.log(`Response ${JSON.stringify(response)}`);
 
     // const { items } = results.data.tracks;
-    return response;
+    return response.data;
 }
 
 
