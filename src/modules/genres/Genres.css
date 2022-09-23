@@ -1,0 +1,10 @@
+.genres-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+
+.genre-badge{
+    cursor: pointer;
+}

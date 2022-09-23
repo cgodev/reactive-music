@@ -1,13 +1,13 @@
-import { PlaylistService } from "./services/PlaylistService";
+import { PlaylistService } from "../../playlist/services/PlaylistService";
 
-const AddToPlaylist = ({ trackUri }) => {
+const addToPlaylist = ({ trackUri }) => {
     const handleClick = () => {
         fetchData();
     }
 
     const fetchData = async () => {
         const token = localStorage.getItem("token");
-        const data = await PlaylistService.AddToPlaylist(token, trackUri);
+        const data = await PlaylistService.addToPlaylist(token, trackUri);
         console.log(data);
     } 
 
@@ -18,4 +18,4 @@ const AddToPlaylist = ({ trackUri }) => {
     );
 }
 
-export default AddToPlaylist;
+export default addToPlaylist;

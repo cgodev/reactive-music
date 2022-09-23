@@ -1,7 +1,7 @@
 export const config = {
     baseUrl:"https://accounts.spotify.com",
-    clientId: "ca890419dc664ad8b7050e053400ce9a",
-    clientSecret: "5cf68048daef43c68d0c4fd3f1cfbb46",   
+    clientId: "3e8bc26e23fb4fbfa2b2b43f448eb3f8",
+    clientSecret: "0cf964cc07524a93846c6989d6ba2415",   
     redirectUrl: "http://localhost:3000/callback",
     responseType: "token",
     showDialog: true
