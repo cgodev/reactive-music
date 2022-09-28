@@ -1,6 +1,6 @@
 import { PlaylistService } from "../../playlist/services/PlaylistService";
 
-const addToPlaylist = ({ trackUri }) => {
+const AddToPlaylist = ({ trackUri }) => {
     const handleClick = () => {
         fetchData();
     }
@@ -18,4 +18,4 @@ const addToPlaylist = ({ trackUri }) => {
     );
 }
 
-export default addToPlaylist;
+export default AddToPlaylist;
