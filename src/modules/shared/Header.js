@@ -11,22 +11,13 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink
-                                to="/"
-                                className={({isActive}) => isActive ? "nav-link active" : "nav-link"}
-                            >Home</NavLink>
+                            <NavLink end to="/" className={({isActive}) => isActive ? "nav-link active text-decoration-underline" : "nav-link"}>Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink
-                                to="/search"
-                                className={({isActive}) => isActive ? "nav-link active" : "nav-link"}
-                            >Search</NavLink>
+                            <NavLink to="/search" className={({isActive}) => isActive ? "nav-link active text-decoration-underline" : "nav-link"}>Search</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink
-                                to="/room-creation"
-                                className={({isActive}) => isActive ? "nav-link active" : "nav-link"}
-                            >Room creation</NavLink>
+                            <NavLink to="/room-creation" className={({isActive}) => isActive ? "nav-link active text-decoration-underline" : "nav-link"}>Room creation</NavLink>
                         </li>
                     </ul>
                 </div>
