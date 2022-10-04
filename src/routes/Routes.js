@@ -17,7 +17,7 @@ const Routing = () => {
             <Routes>
                 <Route path="/" element={<Home/>}/>
                 <Route path="/callback" element={<RedirectPage/>}/>
-                {/* <Route path="/search" element={<SearchPage/>}/> */}
+                <Route path="/search" element={<SearchPage/>}/>
                 <Route path="/room-creation" element={<CreateRoom/>} />
                 <Route path="/room/:uid/:playlistId" element={<RoomDetail />} />
             </Routes>
