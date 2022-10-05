@@ -1,3 +1,19 @@
-.forms-messages-required{
+.forms-messages-required {
     color: #dc3545;
+}
+
+.search-container::-webkit-scrollbar {
+    width: 10px;
+}
+
+.search-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.search-container::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.search-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

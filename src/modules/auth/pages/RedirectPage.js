@@ -13,7 +13,7 @@ const RedirectPage = () => {
 
     return (
         <div className="container p-4">
-            <h2> Redireccionando...</h2>
+            <h2> Redirecting...</h2>
         </div>
     );
 }

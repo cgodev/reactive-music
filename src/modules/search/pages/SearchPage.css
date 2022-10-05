@@ -1,7 +1,11 @@
-.section-search {
+/* .section-search {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+} */
+
+.search-wrapper{
+    z-index: 9999;
 }

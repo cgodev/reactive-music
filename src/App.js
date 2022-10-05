@@ -1,9 +1,9 @@
-import Header from "./modules/shared/Header";
 import Routing from "./routes/Routes";
+import './Styles.css'
 
 const App = () => {
     return (
-        <main>
+        <main className="app-wrapper bg-dark">
             <Routing></Routing>
         </main>
     );

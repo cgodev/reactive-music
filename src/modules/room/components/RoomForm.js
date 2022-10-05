@@ -24,6 +24,11 @@ const RoomForm = () => {
         fetchUserData();
     }, [])
 
+    useEffect(() => {
+        localStorage.setItem('playlistId', roomData.id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [roomData])
+
     const fetchUserData = async() => {
         const userData = await UserService.getUserInfo();
         setUserData(userData);
@@ -55,7 +60,7 @@ const RoomForm = () => {
 
     return <section className="">
         <div className="container" >
-            <h1>Create a room for your selectors.</h1>
+            <h1 className="text-center mb-5">Create a room for your selectors.</h1>
             <form className="form mb-3" onSubmit={handleSubmit(onSubmit)}>
                 <div className="mb-3">
                     <label htmlFor="roomName" className="form-label">Name of your room</label>
@@ -65,7 +70,7 @@ const RoomForm = () => {
                 <div className="mb-3">
                     {errors.roomName && <span className="forms-messages-required">Room name is required.</span>}
                 </div>
-                <button type="submit" className="btn btn-primary">Create Room</button>
+                <button type="submit" className="btn btn-dark btn-outline-light">Create Room</button>
             </form>
             <div className="qr-code d-block text-center">
                 {qrGenerated && <QRCode className="mb-3" value={`https://localhost:3000/room/${userData.id}/${roomData.id}`} />}

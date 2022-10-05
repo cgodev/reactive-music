@@ -1,21 +1,21 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Header = () => {
     return (
-        <nav className="navbar navbar-expand-lg bg-light">
+        <nav className="navbar navbar-expand-lg bg-light position-fixed top-0 w-100">
             <div className="container-fluid">
-                <a className="navbar-brand" href="#">Navbar</a>
+                <Link to={'/'} className="navbar-brand">Reactive Music</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <NavLink end to="/" className={({isActive}) => isActive ? "nav-link active text-decoration-underline" : "nav-link"}>Home</NavLink>
+                            <NavLink end to="/login" className={({isActive}) => isActive ? "nav-link active text-decoration-underline" : "nav-link"}>Login</NavLink>
                         </li>
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink to="/search" className={({isActive}) => isActive ? "nav-link active text-decoration-underline" : "nav-link"}>Search</NavLink>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <NavLink to="/room-creation" className={({isActive}) => isActive ? "nav-link active text-decoration-underline" : "nav-link"}>Room creation</NavLink>
                         </li>

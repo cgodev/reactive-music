@@ -7,4 +7,5 @@
 
 .genre-badge{
     cursor: pointer;
+    border: 1px solid whitesmoke;
 }

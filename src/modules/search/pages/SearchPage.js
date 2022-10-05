@@ -12,6 +12,7 @@ const SearchPage = () => {
 
     useEffect(() => {
         fetchSongs(token);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const fetchSongs = async () => {
@@ -21,21 +22,13 @@ const SearchPage = () => {
     }
 
     if(!token){
-        return <div className="container p-4">
-            <div className="row">
-                <div className="col d-flex">
-                    <p>Para continuar <Link to="/">debes iniciar sesión</Link></p>
-                </div>
-            </div>
-        </div>
+        return <p>Para continuar <Link to="/">debes iniciar sesión</Link></p>
     }
 
     return (
         <section className="section-search">
-            <div className="search-wrapper">
-                <Search/>
-                <SearchResult results={results}/>
-            </div>
+            <Search />
+            <SearchResult results={results}/>
         </section>
     );
 }

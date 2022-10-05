@@ -5,13 +5,9 @@ const Auth = () => {
     const { signIn } = useSpotifyAuth();
 
     return (
-        <div className="row">
-            <div className="col">
-                <button className="btn btn-primary" onClick={signIn}>
-                    Iniciar sesión
-                </button>
-            </div>
-        </div>
+        <button className="btn btn-dark btn-outline-light d-flex" onClick={signIn}>
+            Spotify Login
+        </button>
     );
 }
 

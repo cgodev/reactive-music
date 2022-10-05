@@ -1,7 +1,11 @@
 // Config
+import { useNavigate } from "react-router-dom";
 import { config } from "../../../config/index";
 
 const useSpotifyAuth = () => {
+
+    const navigate = useNavigate();
+
     const signIn = () => {
         const params = new URLSearchParams({
             client_id: config.clientId,
@@ -17,6 +21,8 @@ const useSpotifyAuth = () => {
             localStorage.setItem("token", token);
             localStorage.setItem("expdate", expDate);
             popup.close();
+            navigate('/room-creation');
+            
         }
     }
 
