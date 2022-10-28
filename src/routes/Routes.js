@@ -17,7 +17,7 @@ const Routing = () => {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/callback" element={<RedirectPage/>}/>
                 <Route path="/room-creation" element={<CreateRoom/>} />
-                <Route path="/room/:uid/:playlistId" element={<RoomDetail />} />
+                <Route path="/room/:roomId" element={<RoomDetail/>} />
             </Routes>
         </Router>
     );

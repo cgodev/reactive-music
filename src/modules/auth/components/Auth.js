@@ -1,11 +1,13 @@
-// Hooks
-import useSpotifyAuth from "../hooks/useSpotifyAuth";
+// Config
+import { config } from "../../../config/index";
 
 const Auth = () => {
-    const { signIn } = useSpotifyAuth();
+    const handleClick = () => {
+        window.location.href = `${config.apiUrl}/auth`;
+    }
 
     return (
-        <button className="btn btn-dark btn-outline-light d-flex" onClick={signIn}>
+        <button className="btn btn-dark btn-outline-light d-flex" onClick={handleClick}>
             Spotify Login
         </button>
     );

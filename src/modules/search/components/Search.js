@@ -1,10 +1,33 @@
-const Search = () => {
+import { useState } from "react";
+
+const Search = ({ handler }) => {
+    const [search, setSearch] = useState("");
+
+    const handleInput = (e) => {
+        e.preventDefault();
+        
+        const { value } = e.target;
+        setSearch(value);
+        handler(value);
+    }
+
     return (
         <div className="search-wrapper bg-dark position-sticky top-0 pb-3">
-            <p>Search works!</p>
-            <input type="text" className="form-control"/>
+            <form className="d-flex">
+                <input
+                    type="text"
+                    name="criteria"
+                    value={search}
+                    className="form-control me-4"
+                    onChange={handleInput}
+                />
+                {/* <input
+                    type="submit"
+                    value="Buscar"
+                    className="btn btn-secondary"
+                /> */}
+            </form>
         </div>
-        
     );
 }
 

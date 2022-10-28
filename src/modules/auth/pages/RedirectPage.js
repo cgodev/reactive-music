@@ -1,14 +1,12 @@
 // React
 import { useEffect} from 'react';
-
-// Hooks
-import useSpotifyAuth from "../hooks/useSpotifyAuth";
+import { useNavigate } from "react-router-dom";
 
 const RedirectPage = () => {
-    const { getAuthData } = useSpotifyAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        getAuthData();
+        navigate("/room-creation");
     }, []);
 
     return (

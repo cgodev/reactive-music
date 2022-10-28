@@ -1,7 +1,11 @@
 import Track from "../../track/components/Track";
 
 const SearchResult = ({ results }) => {
-    // console.log(results);
+    if(!results || results.length == 0){
+        return (
+            <h2 className="fs-4 fw-light text-center">Sin resultados</h2>
+        );
+    }
 
     return (
         <div className="search-result-wrapper">

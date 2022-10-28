@@ -1,64 +1,139 @@
 import axios from "axios";
-import pretier from "../../helpers/Pretier";
+import Cookies from "js-cookie";
+import { ManageToken } from "../../helpers/ManageToken";
+import { config } from "../../../config/index";
+import { generateRoomUrl } from "../../helpers/ManageRoomUrl";
 // import ApiConnector from "../../../helpers/ApiConnector";
-
-const getPlaylistId = () => {
-    return localStorage.getItem('playlistId') || '';
-}
 
 //url:`https://api.spotify.com/v1/playlists/${getPlaylistId()}/tracks/?uris=${trackId}`,
 
 const getHeaders = () => {
     return {
-        "Authorization": `Bearer ${localStorage.getItem('token').toString() || ''}`,
+        "Authorization": `Bearer ${Cookies.get('token').toString() || ''}`,
         "Content-Type": "application/json"
     }
 }
 
-const addToPlaylist = async (token = "", trackId, playlistId = "5ADNOwZXizJoWuil9Uzpjm") => {
-    const { data } = await axios({
-        url: "https://api.spotify.com/v1/playlists/"+getPlaylistId()+"/tracks/?uris="+trackId,
-        //url:`https://api.spotify.com/v1/playlists/${getPlaylistId()}/tracks/?uris=${trackId}`,
-        method: "POST",
-        headers: getHeaders()
+const addToPlaylist = async (trackId, roomData) => {
+    const { roomId, userId, id_playlist } = roomData;
+
+    try {
+        const { data } = await axios({
+            url: "https://api.spotify.com/v1/playlists/"+id_playlist+"/tracks/?uris="+trackId,
+            //url:`https://api.spotify.com/v1/playlists/${getPlaylistId()}/tracks/?uris=${trackId}`,
+            method: "POST",
+            headers: getHeaders()
+        });
+
+        return data;
+
+    } catch (error) {
+        const { status } = error.response;
+        if(status == 401){
+            // Get user role from db userData
+            await ManageToken.refreshToken("GUEST_ROLE", roomId, userId);
+            return await addToPlaylist(trackId, roomData);
+        }
+    }
+}
+
+const createPlaylist = async(playlistData) => {
+    const { userId, name, genres } = playlistData;
+    let response = {};
+
+    try {
+        response = await axios({
+            url: `https://api.spotify.com/v1/users/${userId}/playlists`,
+            method: "POST",
+            data: JSON.stringify({name}),
+            headers: getHeaders()
+        });
+
+        const { data } = await axios({
+            url: `${config.apiUrl}/rooms/save`,
+            method: "POST",
+            data: JSON.stringify({
+                uid: userId,
+                name: name,
+                id_playlist: response.data.id,
+                token: Cookies.get('token'),
+                refresh_token: Cookies.get('refresh_token'),
+                genres_seed: genres,
+                access_url: generateRoomUrl(null)
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
+        });
+        
+        return data;
+
+    } catch (error) {
+        if(error.response.status){
+            const { status } = error.response;
+
+            switch(status){
+                case 400: 
+                    await deletePlaylist(response.data.id);
+                    break;
+                case 401:
+                    // Get user role from db userData
+                    await ManageToken.refreshToken("HOST_ROLE", null, null);
+                    return await createPlaylist(playlistData);
+            }
+        }
+
+        return error.response.data;
+    }
+}
+
+const deletePlaylist = async (playlistId) => {
+    const { status } = await axios({
+       url: `https://api.spotify.com/v1/playlists/${playlistId}/followers`,
+       method: "DELETE",
+       headers: getHeaders()
     });
 
-    // const { items } = results.data.tracks;
-    return data;
+    return status == 200 ? true : false;
 }
 
-const createPlaylist = async(userId,playlistData) => {
-    const response = await axios.post(
-        `https://api.spotify.com/v1/users/${userId}/playlists`, 
-        playlistData ,
-        {
-            headers: getHeaders()
+const fetchPlaylist = async (roomData) => {
+    const { _id, uid, id_playlist } = roomData;
+
+    try {
+        const response = await axios.get(
+            `https://api.spotify.com/v1/playlists/${id_playlist}`, {
+                headers: getHeaders()
+            }
+        );
+
+        const { name } = response.data;
+        const { items } = response.data.tracks;
+        return {
+            name, tracks: items
+        };
+        
+    } catch (error) {
+        if(error.response.status){
+            const { status } = error.response;
+
+            switch(status){
+                case 401:
+                    // Get user role from db userData
+                    await ManageToken.refreshToken("GUEST_ROLE", _id, uid);
+                    return await fetchPlaylist(roomData);
+            }
         }
-    );
-    //console.log(`Response ${JSON.stringify(response)}`);
 
-    // const { items } = results.data.tracks;
-    return response.data;
+        return {
+            name: "",
+            tracks: []
+        };
+    }
 }
 
-const fetchPlaylist = async (playlistId) => {
-    const response = await axios.get(
-        `https://api.spotify.com/v1/playlists/${playlistId}`, {
-            headers: getHeaders()
-        }
-    );
-    console.log(`Response ${pretier(response)}`);
-
-    const { name } = response.data;
-    const { items } = response.data.tracks;
-    return {
-        name, tracks: items
-    };
-}
-
-
-
-export  const PlaylistService = {
+export const PlaylistService = {
     addToPlaylist,
     createPlaylist,
     fetchPlaylist

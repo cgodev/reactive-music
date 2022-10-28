@@ -1,18 +1,28 @@
+import Cookies from 'js-cookie';
 import ApiConnector from '../../helpers/ApiConnector';
+import { ManageToken } from '../../helpers/ManageToken';
 
 const fetchGenresSeeds = async () => {
-    let token = localStorage.getItem('token');
-
-    const response = await ApiConnector.get('/recommendations/available-genre-seeds',{
-        headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json"
-        }
-    });
+    const token = Cookies.get("token");
     
-    return response.data.genres;
-}
+    try {
+        const { data } = await ApiConnector.get('/recommendations/available-genre-seeds',{
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
 
+        return data.genres;
+
+    } catch (error) {
+        const { status } = error.response;
+        if(status == 401){
+            await ManageToken.refreshToken();
+            return await fetchGenresSeeds();
+        }    
+    }
+}
 
 export const genresService = {
     fetchGenresSeeds

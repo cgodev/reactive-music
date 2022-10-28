@@ -2,8 +2,25 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    max-height: 200px;
+    overflow: auto;
 }
 
+.genres-list::-webkit-scrollbar {  
+    width: 10px;
+}
+
+.genres-list::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.genres-list::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.genres-list::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 
 .genre-badge{
     cursor: pointer;

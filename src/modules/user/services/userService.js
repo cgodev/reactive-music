@@ -1,16 +1,31 @@
+import Cookies from "js-cookie";
 import ApiConnector from "../../helpers/ApiConnector";
+import { ManageToken } from "../../helpers/ManageToken";
 
 const getUserInfo = async () => {
-    const token = localStorage.getItem('token');
-    const response = await ApiConnector.get(`/me`,{
+    let data = {};
+
+    try {
+        data = await getData();
+    } catch (error) {
+        await ManageToken.refreshToken("HOST_ROLE");
+        data = await getData();
+    }
+
+    console.log(data);
+    return data;
+}
+
+async function getData(){
+    const token = Cookies.get('token');
+    const { data } = await ApiConnector.get(`/me`,{
         headers: {
             "Authorization": `Bearer ${token}`,
             "Content-Type": "application/json"
         }
-    })
+    });
 
-    console.log(response.data);
-    return response.data;
+    return data;
 }
 
 export const UserService = {

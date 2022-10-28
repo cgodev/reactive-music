@@ -4,16 +4,19 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 import { v4 as uuidv4 } from 'uuid';
 import QRCode from "react-qr-code";
+import Modal from "../../modal/Modal";
 
 import '../Room.css';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { PlaylistService } from "../../playlist/services/PlaylistService";
 import { UserService } from "../../user/services/userService";
 
 import { Link } from "react-router-dom";
-const RoomForm = () => {
+import { generateRoomUrl } from "../../helpers/ManageRoomUrl";
 
+const RoomForm = () => {
+    const [modalOpen, setModalOpen] = useState(false);
     const {register, handleSubmit, formState: {errors}} = useForm();
     const [genresSelection, setGenresSelection] = useState([]);
     const [qrGenerated, setQrGenerated] = useState(false);
@@ -29,6 +32,10 @@ const RoomForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [roomData])
 
+    const handleModal = () => {
+        setModalOpen(!modalOpen);
+    }
+
     const fetchUserData = async() => {
         const userData = await UserService.getUserInfo();
         setUserData(userData);
@@ -36,26 +43,29 @@ const RoomForm = () => {
     }
 
     const onSubmit = async (data) => {
-        Swal.fire(
-            'This is your room.',
-            `Name: ${data.roomName} / Genres: ${genresSelection}`
-        )
+        // Swal.fire(
+        //     'This is your room.',
+        //     `Name: ${data.roomName} / Genres: ${genresSelection}`
+        // )
+        handleModal();
         const timeStamp = moment().format('LL');
         const uid = uuidv4();
 
         const newRoom = {
-            name: `${data.roomName} - ${timeStamp} - ${uid}`
+            userId: userData.id,
+            name: `${data.roomName} - ${timeStamp} - ${uid}`,
+            genres: genresSelection
         }
 
-        const playListResponse = await PlaylistService.createPlaylist(userData.id, newRoom);
+        const playListResponse = await PlaylistService.createPlaylist(newRoom);
         setRoomData(playListResponse);
-        setQrGenerated(true);
-        console.log(`Playlist creation: ${JSON.stringify(playListResponse)}`);
+        setQrGenerated(playListResponse.body ? true : false);
+        console.log("Playlist creation:");
+        console.log(playListResponse.body);
     }
 
     const getGenresSelection = (genresPayload) => {
         setGenresSelection(genresPayload);
-        //console.log(`Updated ${genresSelection}`);
     }
 
     return <section className="">
@@ -72,11 +82,23 @@ const RoomForm = () => {
                 </div>
                 <button type="submit" className="btn btn-dark btn-outline-light">Create Room</button>
             </form>
-            <div className="qr-code d-block text-center">
-                {qrGenerated && <QRCode className="mb-3" value={`https://localhost:3000/room/${userData.id}/${roomData.id}`} />}
-                {qrGenerated && <Link to={`/room/${userData.id}/${roomData.id}`} className="d-block">Go to your room!!</Link>}
-            </div>
         </div>
+        <Modal handleClose={handleModal} isOpen={modalOpen}>
+            <div className="qr-code d-block text-center">
+                <h2 className="display-6">
+                    { roomData.body ? "Your new room" : roomData.message }
+                </h2>
+                {
+                    qrGenerated && 
+                    <div>
+                        <p>{roomData.name}</p>
+                        <p>Genres: {genresSelection.join(", ").trim()}</p>
+                    </div>
+                }
+                {qrGenerated && <QRCode className="mb-3" value={`https://localhost:3000/room/${roomData.body._id}`}/>}
+                {qrGenerated && <Link to={generateRoomUrl(roomData.body._id)} className="d-block">Go to your room!!</Link>}
+            </div>
+        </Modal>
     </section>
 }
 
