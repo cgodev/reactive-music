@@ -49,11 +49,11 @@ const RoomForm = () => {
         // )
         handleModal();
         const timeStamp = moment().format('LL');
-        const uid = uuidv4();
+        // const uid = uuidv4();
 
         const newRoom = {
             userId: userData.id,
-            name: `${data.roomName} - ${timeStamp} - ${uid}`,
+            name: `${data.roomName} - ${timeStamp}`,
             genres: genresSelection
         }
 

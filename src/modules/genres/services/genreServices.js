@@ -18,9 +18,11 @@ const fetchGenresSeeds = async () => {
     } catch (error) {
         const { status } = error.response;
         if(status == 401){
-            await ManageToken.refreshToken();
+            await ManageToken.refreshToken("HOST_ROLE");
             return await fetchGenresSeeds();
-        }    
+        }
+
+        console.log(status);
     }
 }
 

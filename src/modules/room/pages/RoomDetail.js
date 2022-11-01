@@ -25,13 +25,13 @@ const RoomDetail = () => {
 
     const fetchRoom = async () => {
         const { room } = await RoomService.fetchRoom(roomId);
-        console.log("Room data", room);
+        // console.log("Room data", room);
         fetchPlaylist(room);
     }
 
     const fetchPlaylist = async (room) => {
         const data = await PlaylistService.fetchPlaylist(room);
-        console.log("Playlist data", data);
+        // console.log("Playlist data", data);
         setRoomData({
             name: room.name,
             roomId: room._id,
@@ -47,10 +47,9 @@ const RoomDetail = () => {
         <RoomDetailContext.Provider value={{ roomData, fetchPlaylist }}>
             <div className="container h-100 d-flex flex-column justify-content-center py-5 mt-3">
                 <h4 className="text-center">Welcome to {roomData.name} room</h4>
-                <p className="text-center ">Search and play your favorite music here: </p>
-                
+                <p className="text-center mb-5">Search and play your favorite music here:</p>
                 <div className="row justify-content-center mh-100 overflow-hidden">
-                    <div className="col-12 col-lg-6 mh-100 overflow-auto playlist-content">
+                    <div className="col-6 mh-100 overflow-auto playlist-content">
                         <section className="current-playlist-wrapper d-block">
                             {/* <h6>Playlist {roomData.id_playlist} content</h6> */}
                             { 
@@ -70,7 +69,7 @@ const RoomDetail = () => {
                             }
                         </section>
                     </div>
-                    <div className="search-container col-12 col-lg-6 mh-100 overflow-auto">
+                    <div className="search-container col-6 mh-100 overflow-auto">
                         <SearchPage/>
                     </div>
                 </div>
