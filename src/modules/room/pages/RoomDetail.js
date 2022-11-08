@@ -46,8 +46,21 @@ const RoomDetail = () => {
         <Header/>
         <RoomDetailContext.Provider value={{ roomData, fetchPlaylist }}>
             <div className="container h-100 d-flex flex-column justify-content-center py-5 mt-3">
-                <h4 className="text-center">Welcome to {roomData.name} room</h4>
-                <p className="text-center mb-5">Search and play your favorite music here:</p>
+                <div className="row">
+                    <div className="col">
+                        <h4 className="text-center">Welcome to {roomData.name} room</h4>
+                        <div className="text-center mb-5">
+                            <h5 className="mb-3">Allowed genres in this room</h5>
+                            <div className="d-flex justify-content-center align-items-center flex-wrap" style={{ "gap": "10px" }}>
+                                {
+                                    roomData.genres_seed.map((genre, index) => 
+                                        <span className="badge bg-primary" key={index}>{ genre }</span>
+                                    )
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div className="row justify-content-center mh-100 overflow-hidden">
                     <div className="col-6 mh-100 overflow-auto playlist-content">
                         <section className="current-playlist-wrapper d-block">

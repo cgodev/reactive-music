@@ -1,15 +1,17 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Search from '../components/Search';
 import SearchResult from '../components/SearchResult';
 import { MusicService } from "../services/MusicService";
+import { RoomDetailContext } from "../../room/context/RoomDetailContext";
 
 import "./SearchPage.css";
 
 const SearchPage = () => {
+    const { roomData } = useContext(RoomDetailContext);
     const [results, setResults] = useState([]);
 
     const fetchSongs = async (criteria) => {
-        setResults(await MusicService.FetchSongsByCriteria(criteria));
+        setResults(await MusicService.FetchSongsByCriteria(criteria, roomData));
     }
 
     return (

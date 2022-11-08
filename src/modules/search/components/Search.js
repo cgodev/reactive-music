@@ -18,6 +18,7 @@ const Search = ({ handler }) => {
                     type="text"
                     name="criteria"
                     value={search}
+                    placeholder="Search and play your favorite music here"
                     className="form-control me-4"
                     onChange={handleInput}
                 />
