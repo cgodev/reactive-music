@@ -5,8 +5,8 @@ const CreateRoom = () => {
     return (
         <>
             <Header/>
-            <div className="container h-100 d-flex justify-content-center align-items-center">
-                <div className="row justify-content-center">
+            <div className="container h-100">
+                <div className="row h-100 justify-content-center">
                     <div className="col-12 col-lg-10">
                         <RoomForm/>
                     </div>

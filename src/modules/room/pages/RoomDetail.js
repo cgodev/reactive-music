@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import SearchPage from "../../search/pages/SearchPage";
 import { useEffect, useState } from "react";
-import Header from "../../shared/Header";
 import {PlaylistService} from '../../playlist/services/PlaylistService';
 import { RoomService } from "../services/RoomService";
 import { RoomDetailContext } from "../context/RoomDetailContext";
@@ -43,13 +42,12 @@ const RoomDetail = () => {
     }
 
     return <>
-        <Header/>
         <RoomDetailContext.Provider value={{ roomData, fetchPlaylist }}>
-            <div className="container h-100 d-flex flex-column justify-content-center py-5 mt-3">
-                <div className="row">
+            <div className="container h-100 d-flex flex-column justify-content-center">
+                <div className="row mb-5">
                     <div className="col">
-                        <h4 className="text-center">Welcome to {roomData.name} room</h4>
-                        <div className="text-center mb-5">
+                        <h3 className="text-center">Welcome to {roomData.name} room</h3>
+                        <div className="text-center">
                             <h5 className="mb-3">Allowed genres in this room</h5>
                             <div className="d-flex justify-content-center align-items-center flex-wrap" style={{ "gap": "10px" }}>
                                 {
@@ -61,7 +59,7 @@ const RoomDetail = () => {
                         </div>
                     </div>
                 </div>
-                <div className="row justify-content-center mh-100 overflow-hidden">
+                <div className="row justify-content-center overflow-hidden" style={{ "height": "60%" }}>
                     <div className="col-6 mh-100 overflow-auto playlist-content">
                         <section className="current-playlist-wrapper d-block">
                             {/* <h6>Playlist {roomData.id_playlist} content</h6> */}
@@ -70,7 +68,7 @@ const RoomDetail = () => {
                                     {
                                         roomData.tracks.map(({track}, index) => 
                                             <span
-                                                className="badge rounded-pill bg-secondary p-3 text-center d-block my-3"
+                                                className="badge rounded bg-secondary p-3 text-center d-block my-3"
                                                 key={`${track.id}-${index}`}
                                             >
                                                 {track.name}
