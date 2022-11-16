@@ -1,4 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
+import SettingsPage from "../settings/pages/SettingsPage";
 
 const Header = () => {
     return (
@@ -10,9 +11,9 @@ const Header = () => {
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto">
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <NavLink end to="/auth" className={({isActive}) => `nav-link text-white ${isActive && "text-decoration-underline"}`}>Login</NavLink>
-                        </li>
+                        </li> */}
                         <li className="nav-item">
                             <NavLink to="/room-creation" className={({isActive}) => `nav-link text-white ${isActive && "text-decoration-underline"}`}>Room creation</NavLink>
                         </li>
@@ -31,7 +32,8 @@ const Header = () => {
                                 <a className="dropdown-item fs-6" href="#">Profile</a>
                             </li>
                             <li>
-                                <a className="dropdown-item fs-6" href="#">Settings</a>
+                                {/* <a className="dropdown-item fs-6" href="#">Settings</a> */}
+                                <SettingsPage className="dropdown-item fs-6"/>
                             </li>
                         </ul>
                     </div>
