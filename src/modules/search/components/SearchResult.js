@@ -10,7 +10,6 @@ const SearchResult = ({ results }) => {
     return (
         <div className="search-result-wrapper">
             {results.map((result) => {
-                // console.log(result);
                 return <Track
                     key={result.id}
                     thumbnail={result.album.images[0].url}

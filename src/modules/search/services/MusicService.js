@@ -46,19 +46,24 @@ const getAndProcessGenres = async (items, { genres_seed }) => {
     });
 
     items.forEach((item) => {
-        item.genres.forEach((genre, i) => {
+        let genresFiltered = [...item.genres];
+
+        item.genres.forEach((genre) => {
             const genresSplit = genre.split(" ");
-            let isMatch;
-            
-            if(genres_seed[i]){
-                for(const genreSeed of genres_seed) {
-                    isMatch = genresSplit.some((genreSplit) => genreSplit == genreSeed.toLowerCase());
-                    if(isMatch){
-                        item.add = true;
-                    }
+            let isMatch = false;
+            genres_seed.forEach((genreSeed) => {
+                if(!isMatch){
+                    isMatch = genresSplit.some((genreSplit) => genreSplit.toLowerCase() == genreSeed.toLowerCase());
+                    if(isMatch) item.add = true;
                 }
+            });
+
+            if(!isMatch){
+                genresFiltered.splice(genresFiltered.indexOf(genre), 1);
             }
         });
+
+        item.genres = genresFiltered;
     });
 
     const itemsFiltered = items.filter((item) => item.add);
@@ -80,8 +85,9 @@ const getGenresInfo = async (items) => {
 
 const fetchGenres = async (artistId) => {
     const token = Cookies.get("token");
+    let genres = [];
     
-    for(const id of artistId) {
+    for(const id of artistId) {    
         const { data } = await axios({
             url: `https://api.spotify.com/v1/artists/${id}`,
             method: "GET",
@@ -91,8 +97,10 @@ const fetchGenres = async (artistId) => {
             }
         });
 
-        return data.genres;
+        genres.push(...data.genres);
     }
+
+    return genres;
 }
 
 export const MusicService = {

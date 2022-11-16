@@ -14,7 +14,7 @@ const fetchRoom = async (roomId) => {
             return {};
         }
         
-        setTokens(roomId, data);
+        setTokens(data);
         return data;
 
     } catch (error) {
@@ -23,9 +23,9 @@ const fetchRoom = async (roomId) => {
     }
 }
 
-const setTokens = (roomId, { room }) => {
-    Cookies.set("token", room.token, { path: "" });
-    Cookies.set("refresh_token", room.refresh_token, { path: "" });
+const setTokens = ({ room }) => {
+    Cookies.set("token", room.token);
+    Cookies.set("refresh_token", room.refresh_token);
 }
 
 export const RoomService = {

@@ -3,6 +3,10 @@ import { useState } from "react";
 const Search = ({ handler }) => {
     const [search, setSearch] = useState("");
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    }
+
     const handleInput = (e) => {
         e.preventDefault();
         
@@ -13,7 +17,7 @@ const Search = ({ handler }) => {
 
     return (
         <div className="search-wrapper bg-dark position-sticky top-0 pb-3">
-            <form className="d-flex">
+            <form onSubmit={handleSubmit} className="d-flex">
                 <input
                     type="text"
                     name="criteria"
