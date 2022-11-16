@@ -11,7 +11,7 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav me-auto">
                         <li className="nav-item">
-                            <NavLink end to="/login" className={({isActive}) => `nav-link text-white ${isActive && "text-decoration-underline"}`}>Login</NavLink>
+                            <NavLink end to="/auth" className={({isActive}) => `nav-link text-white ${isActive && "text-decoration-underline"}`}>Login</NavLink>
                         </li>
                         <li className="nav-item">
                             <NavLink to="/room-creation" className={({isActive}) => `nav-link text-white ${isActive && "text-decoration-underline"}`}>Room creation</NavLink>
