@@ -41,7 +41,7 @@ const SettingsPage = ({ className }) => {
                         <label htmlFor="redirectUrl" className="form-label text-secondary">Redirect url</label>
                         <input 
                             type="text"
-                            readonly
+                            readOnly
                             aria-describedby="redirectUrlHelp"
                             defaultValue="http://localhost:8000/api/auth/callback"
                             className="form-control text-secondary" 
