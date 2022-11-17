@@ -7,13 +7,14 @@ import QRCode from "react-qr-code";
 import Modal from "../../modal/Modal";
 
 import '../Room.css';
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import { PlaylistService } from "../../playlist/services/PlaylistService";
 import { UserService } from "../../user/services/userService";
 
 import { Link } from "react-router-dom";
 import { generateRoomUrl } from "../../helpers/ManageRoomUrl";
+import Clipboard from "../../clipboard/components/Clipboard";
 
 const RoomForm = () => {
     const [modalOpen, setModalOpen] = useState(false);
@@ -47,7 +48,6 @@ const RoomForm = () => {
         //     'This is your room.',
         //     `Name: ${data.roomName} / Genres: ${genresSelection}`
         // )
-        handleModal();
         const timeStamp = moment().format('LL');
         // const uid = uuidv4();
 
@@ -60,6 +60,7 @@ const RoomForm = () => {
         const playListResponse = await PlaylistService.createPlaylist(newRoom);
         setRoomData(playListResponse);
         setQrGenerated(playListResponse.body ? true : false);
+        handleModal();
         console.log("Playlist creation:");
         console.log(playListResponse.body);
     }
@@ -85,18 +86,27 @@ const RoomForm = () => {
         </div>
         <Modal handleClose={handleModal} isOpen={modalOpen}>
             <div className="qr-code d-block text-center">
-                <h2 className="display-6">
+                <h2 className="display-6 mb-4">
                     { roomData.body ? "Your new room" : roomData.message }
                 </h2>
                 {
                     qrGenerated && 
-                    <div>
-                        <p>{roomData.name}</p>
-                        <p>Genres: {genresSelection.join(", ").trim()}</p>
-                    </div>
+                    <>
+                        <div>
+                            <p className="mb-1">{roomData.body.name}</p>
+                            <p>Genres: {genresSelection.join(", ").trim()}</p>
+                            <QRCode className="mb-3" value={`https://localhost:3000/room/${roomData.body._id}`}/>
+                            <div className="d-flex justify-content-center align-items-center">
+                                <p className="m-0 me-2">RoomId:</p>
+                                <Clipboard valueToCopy={roomData.body._id}/>
+                            </div>
+                            <Link to={generateRoomUrl(roomData.body._id)} className="d-inline-block" >
+                                Go to your room!!
+                            </Link>
+                        </div>
+                    </>
+                    
                 }
-                {qrGenerated && <QRCode className="mb-3" value={`https://localhost:3000/room/${roomData.body._id}`}/>}
-                {qrGenerated && <Link to={generateRoomUrl(roomData.body._id)} className="d-block">Go to your room!!</Link>}
             </div>
         </Modal>
     </section>
