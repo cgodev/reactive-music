@@ -14,7 +14,7 @@ const Modal = ({ children, isOpen, handleClose }) => {
             document.addEventListener("keyup", handleKey);
         } 
 
-        return () => { 
+        return () => {
             document.removeEventListener("keyup", handleKey); 
         }
     }, [isOpen]);
@@ -28,7 +28,7 @@ const Modal = ({ children, isOpen, handleClose }) => {
             <div className="p-5 d-flex justify-content-center align-items-center my-modal">
                 <div className="row w-50 position-relative">
                     <div className="col rounded bg-white p-4">
-                        <span className="fs-4 text-black close-icon" onClick={handleClose}>X</span>
+                        <button type="button" className="btn-close position-absolute top-0 end-0 m-2" aria-label="Close" onClick={handleClose}></button>
                         <div className="mt-4 text-black">
                             { children }
                         </div>

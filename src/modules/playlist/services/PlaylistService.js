@@ -59,7 +59,7 @@ const createPlaylist = async(playlistData) => {
                 token: Cookies.get('token'),
                 refresh_token: Cookies.get('refresh_token'),
                 genres_seed: genres,
-                access_url: generateRoomUrl(null)
+                access_url: generateRoomUrl()
             }),
             headers: {
                 "Content-Type": "application/json"

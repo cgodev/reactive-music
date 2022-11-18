@@ -9,11 +9,3 @@
     z-index: 100;
     background-color: rgba(0, 0, 0, .6);
 }
-
-.close-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 5px 10px 0 0;
-    cursor: pointer;
-}
