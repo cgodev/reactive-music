@@ -5,10 +5,6 @@ import { useEffect, useRef } from "react";
 import ClipboardJS from "clipboard";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
 
-// Assets
-import clipboardIcon from "../../../assets/images/clipboard.svg";
-import clipboardCheckIcon from "../../../assets/images/clipboard-check.svg";
-
 const Clipboard = ({ title, valueToCopy }) => {
     const copyButton = useRef(null);
 
