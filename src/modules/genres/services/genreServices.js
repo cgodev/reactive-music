@@ -1,28 +1,20 @@
-import Cookies from 'js-cookie';
-import ApiConnector from '../../helpers/ApiConnector';
-import { ManageToken } from '../../helpers/ManageToken';
+import { config } from '../../../config';
+import axios from 'axios';
 
 const fetchGenresSeeds = async () => {
-    const token = Cookies.get("token");
-    
     try {
-        const { data } = await ApiConnector.get('/recommendations/available-genre-seeds',{
+        const { data } = await axios({
+            url: `${config.apiUrl}/genres`,
+            method: "GET",
             headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
             }
         });
 
-        return data.genres;
+        return data.seeds;
 
     } catch (error) {
-        const { status } = error.response;
-        if(status == 401){
-            await ManageToken.refreshToken("HOST_ROLE");
-            return await fetchGenresSeeds();
-        }
-
-        console.log(status);
+        console.log(error);
     }
 }
 

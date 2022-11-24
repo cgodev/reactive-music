@@ -1,8 +1,7 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { ManageToken } from "../../helpers/ManageToken";
-import { config } from "../../../config/index";
-import { generateRoomUrl } from "../../helpers/ManageRoomUrl";
+import { RoomService } from "../../room/services/RoomService";
 // import ApiConnector from "../../../helpers/ApiConnector";
 
 //url:`https://api.spotify.com/v1/playlists/${getPlaylistId()}/tracks/?uris=${trackId}`,
@@ -49,24 +48,7 @@ const createPlaylist = async(playlistData) => {
             headers: getHeaders()
         });
 
-        const { data } = await axios({
-            url: `${config.apiUrl}/rooms/save`,
-            method: "POST",
-            data: JSON.stringify({
-                uid: userId,
-                name: name,
-                id_playlist: response.data.id,
-                token: Cookies.get('token'),
-                refresh_token: Cookies.get('refresh_token'),
-                genres_seed: genres,
-                access_url: generateRoomUrl()
-            }),
-            headers: {
-                "Content-Type": "application/json"
-            },
-            withCredentials: true
-        });
-        
+        const data = RoomService.createRoom(name, userId, genres, response.data.id);
         return data;
 
     } catch (error) {

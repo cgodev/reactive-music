@@ -6,13 +6,9 @@ import { AuthService } from "../services/AuthService";
 
 const Auth = () => {
     const [error, setError] = useState(null);
+
     const handleClick = async () => {
-        /* 
-            When the user login in the application
-            find another way to get the uid, from react state or something similar.
-        */
-        const uid = localStorage.getItem("uid");
-        const result = await AuthService.signIn(uid);
+        const result = await AuthService.signIn();
         setError(result);
     }
 

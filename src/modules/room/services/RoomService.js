@@ -1,6 +1,32 @@
 import axios from "axios";
 import { config } from "../../../config/index";
 import Cookies from "js-cookie";
+import { generateRoomUrl } from "../../helpers/ManageRoomUrl";
+
+const createRoom = async (name, userId, genres, playlistId) => {
+    const token = localStorage.getItem("token");
+
+    const { data } = await axios({
+        url: `${config.apiUrl}/rooms/save`,
+        method: "POST",
+        data: JSON.stringify({
+            uid: userId,
+            name: name,
+            id_playlist: playlistId,
+            token: Cookies.get('token'),
+            refresh_token: Cookies.get('refresh_token'),
+            genres_seed: genres,
+            access_url: generateRoomUrl()
+        }),
+        headers: {
+            "Content-Type": "application/json",
+            "x-token": token
+        },
+        withCredentials: true
+    });
+
+    return data;
+}
 
 const fetchRoom = async (roomId) => {
     try {
@@ -29,5 +55,6 @@ const setTokens = ({ room }) => {
 }
 
 export const RoomService = {
+    createRoom,
     fetchRoom
 };

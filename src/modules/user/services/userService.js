@@ -2,6 +2,7 @@ import Cookies from "js-cookie";
 import ApiConnector from "../../helpers/ApiConnector";
 import { ManageToken } from "../../helpers/ManageToken";
 import axios from "axios";
+import { config } from "../../../config";
 
 const getUserInfo = async () => {
     let data = {};
@@ -31,7 +32,7 @@ async function getData(){
 
 async function createUser(data){
     try {
-        const response = await axios.post(`http://localhost:5000/api/users/`, data);
+        const response = await axios.post(`${config.apiUrl}/users/`, data);
         return response.data;
 
     } catch (error) {

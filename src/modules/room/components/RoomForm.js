@@ -34,7 +34,6 @@ const RoomForm = () => {
     const fetchUserData = async() => {
         const userData = await UserService.getUserInfo();
         setUserData(userData);
-        console.log(`User data ${userData}`);
     }
 
     const onSubmit = async (data) => {

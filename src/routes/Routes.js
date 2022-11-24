@@ -8,7 +8,8 @@ import RoomDetail from "../modules/room/pages/RoomDetail";
 import Home from "../pages/Home";
 import AuthSpotify from '../pages/AuthSpotify'
 import Login from "../modules/auth/pages/Login";
-import Register from "../modules/auth/pages/Register"
+import Register from "../modules/auth/pages/Register";
+// import { ProtectedRoute } from "./components/PrivateRoute";
 
 //TODO: Playlist y buscador de canciones.
 const Routing = () => {
@@ -20,8 +21,8 @@ const Routing = () => {
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/auth" element={<AuthSpotify/>}/>
                 <Route path="/callback" element={<RedirectPage/>}/>
-                <Route path="/room-creation" element={<CreateRoom/>} />
-                <Route path="/room/:roomId" element={<RoomDetail/>} />
+                <Route path="/room-creation" element={<CreateRoom/>}/>
+                <Route path="/room/:roomId" element={<RoomDetail/>}/>
             </Routes>
         </Router>
     );

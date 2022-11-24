@@ -1,4 +1,3 @@
-import { useRef } from 'react';
 import { useEffect, useState } from 'react';
 import '../Genres.css';
 
@@ -6,8 +5,8 @@ const GenresList = ({genresSeeds = ['search a genre'], addGenre, removeGenre}) =
     const [genresList, setGenresList] = useState([]);
     
     useEffect(() => {
-        if(genresSeeds.length > 1){
-            setGenresList(genresSeeds);
+        if(genresSeeds.length >= 1){
+            setGenresList(genresSeeds.map(({name}) => name));
         }
     }, [genresSeeds]);
 
@@ -48,7 +47,7 @@ const GenresList = ({genresSeeds = ['search a genre'], addGenre, removeGenre}) =
 
     return <div className="genres-list">
         {
-            genresList.map( genre => {
+            genresList.map((genre) => {
                 return <span 
                     key={genre}
                     onClick={(event)=> {selectGenre(genre, event)}}

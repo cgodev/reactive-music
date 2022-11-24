@@ -1,10 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { genresService } from "../services/genreServices";
 import GenresList from "./GenresList";
+
 import "../Genres.css";
+import GenresSearchBar from "./GenresSearchBar";
+
+export const genresContext = createContext();
 
 const GenresSearch = ({selectionCallback}) => {
     const [genresSeeds, setGenresSeeds] = useState([]);
+    const [genresBack, setGenresBack] = useState([]);
     const [genresArray, setGenresArray] = useState([]);
 
     useEffect(() => {
@@ -19,6 +24,7 @@ const GenresSearch = ({selectionCallback}) => {
     const fetchSeeds = async () => {
         const seeds = await genresService.fetchGenresSeeds();
         setGenresSeeds(seeds);
+        setGenresBack(seeds);
     }
 
     const addGenre = (genreToAdd) => {
@@ -29,30 +35,19 @@ const GenresSearch = ({selectionCallback}) => {
         setGenresArray(genresArray.filter(genre => genre !== genreToRemove));
     }
 
-    // const renderSelectedGenres = () => {
-    //     if(genresArray.length>0){
-    //         return <div className="mb-3">
-    //             <p>Selected genres:</p>
-    //             <GenresList genresSeeds={genresArray} genreCallback={removeGenre} />
-    //         </div>
-    //     }
-    // }
-
-    return <>
-        {/* <div className="mb-3">
-            <label htmlFor="genreSearchInput" className="form-label">Search a genre</label>
-            <input type="text" className="form-control" id="genreSearchInput" placeholder="Eg: Rock" />
-        </div> */}
-        <p>Select the genres that will be availables to play in your room: </p>
-        <div className="mb-3 genres-list">
-            <GenresList
-                genresSeeds={genresSeeds}
-                addGenre={addGenre}
-                removeGenre={removeGenre}
-            />
-        </div>
-        {/* {renderSelectedGenres()} */}
-    </>
+    return (
+        <>
+            <GenresSearchBar genresBack={genresBack} setGenresSeeds={setGenresSeeds}/>
+            <div className="mb-3 genres-list">
+                <GenresList
+                    genresSeeds={genresSeeds}
+                    addGenre={addGenre}
+                    removeGenre={removeGenre}
+                />
+            </div>
+            {/* {renderSelectedGenres()} */}
+        </>
+    )
 }
 
 export default GenresSearch;

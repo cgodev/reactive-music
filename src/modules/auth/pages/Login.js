@@ -19,18 +19,17 @@ const Login = () => {
     }, [])
 
     const onSubmit = async (data) => {
-
-        
         const response = await AuthService.login(data);
 
         if(response.ok){
-            localStorage.setItem('token',JSON.stringify(response.token));
+            console.log(response);
+            localStorage.setItem('token', response.token);
             //Remember user email
             data.remember?
                 localStorage.setItem('rememberUser', data.email):
                 localStorage.removeItem('rememberUser');
                 
-            navigate("/");
+            navigate("/auth");
         }else{
             console.log(response);
             Swal.fire(
@@ -38,8 +37,7 @@ const Login = () => {
                 `Error: ${response.msg}`,
                 'error'
             )
-        }
-        
+        }     
     }
 
     return (
