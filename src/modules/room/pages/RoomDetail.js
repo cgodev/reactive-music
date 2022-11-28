@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import SearchPage from "../../search/pages/SearchPage";
 import { useEffect, useState } from "react";
 import {PlaylistService} from '../../playlist/services/PlaylistService';
@@ -7,6 +7,7 @@ import { RoomDetailContext } from "../context/RoomDetailContext";
 
 const RoomDetail = () => {
     const {roomId} = useParams();
+    const navigate = useNavigate();
 
     const [roomData, setRoomData] = useState({
         name: null,
@@ -24,7 +25,9 @@ const RoomDetail = () => {
 
     const fetchRoom = async () => {
         const { room } = await RoomService.fetchRoom(roomId);
-        // console.log("Room data", room);
+        if(!room){
+            navigate('/404');
+        }
         fetchPlaylist(room);
     }
 

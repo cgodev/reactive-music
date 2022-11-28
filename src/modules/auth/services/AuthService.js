@@ -1,15 +1,12 @@
 import axios from "axios";
+import Swal from "sweetalert2";
 import { config } from "../../../config/index";
 
 async function signIn() {
     try {
-        /* 
-            When the user login in the application
-            find another way to get the token, from react state or something similar.
-        */
         const token = localStorage.getItem("token");
 
-        const { data, status } = await axios({
+        const {data} = await axios({
             url: `${config.apiUrl}/credentials`,
             method: "GET",
             headers: {
@@ -17,20 +14,22 @@ async function signIn() {
             }
         });
 
-        if (!data || status != 200) {
-            return "There was a problem with user credentials, please try again or configure them";
+        console.log(data);
+
+        if (data.ok) {
+            console.log(data.credentials);
+            const { client_secret, client_id } = data.credentials;
+            window.location.href = `${config.apiUrl}/auth/${client_secret}/${client_id}`;
+        }else{
+            Swal.fire('Something went wrong.', `Error: ${data.msg}`, 'error');
         }
-
-        const { client_secret, client_id } = data.credentials;
-        window.location.href = `${config.apiUrl}/auth/${client_secret}/${client_id}`;
-
     } catch (error) {
         console.log(error);
-        return "There was a problem with user credentials, please try again or configure them";
+        return "General error: contact support.";
     }
 }
 
-const login = async(data) => {
+const login = async (data) => {
     try {
         const response = await axios.post(`${config.apiUrl}/auth/`, data);
         return response.data;

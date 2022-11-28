@@ -1,7 +1,15 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import SettingsPage from "../settings/pages/SettingsPage";
 
 const Header = () => {
+
+    const navigate = useNavigate();
+
+    const logout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        navigate('/');
+    }
     return (
         <nav className="navbar navbar-dark navbar-expand-md bg-transparent border-bottom border-secondary w-100 mb-4">
             <div className="container">
@@ -34,6 +42,9 @@ const Header = () => {
                             <li>
                                 {/* <a className="dropdown-item fs-6" href="#">Settings</a> */}
                                 <SettingsPage className="dropdown-item fs-6"/>
+                            </li>
+                            <li>
+                                <a className="dropdown-item fs-6" href="#" onClick={logout}>Logout</a>
                             </li>
                         </ul>
                     </div>

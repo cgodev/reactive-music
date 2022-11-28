@@ -41,7 +41,23 @@ async function createUser(data){
     }
 }
 
+
+async function createCredentials(data){
+    try{
+        const response = await axios.post(`${config.apiUrl}/credentials/`, data, {
+            headers: {
+                'x-token': localStorage.getItem('token') || '',
+            }
+        })
+        return response.data;
+    }catch(error){
+        console.log(error);
+        return error.response.data;
+    }
+}
+
 export const UserService = {
     getUserInfo,
-    createUser
+    createUser,
+    createCredentials
 }
