@@ -29,7 +29,7 @@ const Login = () => {
                 localStorage.setItem('rememberUser', data.email):
                 localStorage.removeItem('rememberUser');
                 
-            navigate("/auth");
+            navigate("/profile");
         }else{
             console.log(response);
             Swal.fire(

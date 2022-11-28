@@ -24,8 +24,8 @@ async function signIn() {
             Swal.fire('Something went wrong.', `Error: ${data.msg}`, 'error');
         }
     } catch (error) {
-        console.log(error);
-        return "General error: contact support.";
+        const {msg} = error.response.data;
+        Swal.fire('Something went wrong.', `Error: ${msg}`, 'error');
     }
 }
 

@@ -10,6 +10,7 @@ import AuthSpotify from '../pages/AuthSpotify'
 import Login from "../modules/auth/pages/Login";
 import Register from "../modules/auth/pages/Register";
 import NotFound from "../pages/404";
+import ProfilePage from "../modules/settings/pages/ProfilePage";
 // import { ProtectedRoute } from "./components/PrivateRoute";
 
 //TODO: Playlist y buscador de canciones.
@@ -20,6 +21,7 @@ const Routing = () => {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/register" element={<Register/>}/>
+                <Route path="/profile" element={<ProfilePage/>}/>
                 <Route path="/auth" element={<AuthSpotify/>}/>
                 <Route path="/callback" element={<RedirectPage/>}/>
                 <Route path="/room-creation" element={<CreateRoom/>}/>

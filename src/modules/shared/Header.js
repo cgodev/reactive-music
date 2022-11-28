@@ -1,5 +1,5 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import SettingsPage from "../settings/pages/SettingsPage";
+import { AuthService } from "../auth/services/AuthService";
 
 const Header = () => {
 
@@ -10,6 +10,13 @@ const Header = () => {
         localStorage.removeItem('token');
         navigate('/');
     }
+
+
+    const signInSpotify = async () => {
+        const result = await AuthService.signIn();
+        console.log(result);
+    }
+
     return (
         <nav className="navbar navbar-dark navbar-expand-md bg-transparent border-bottom border-secondary w-100 mb-4">
             <div className="container">
@@ -23,29 +30,29 @@ const Header = () => {
                             <NavLink end to="/auth" className={({isActive}) => `nav-link text-white ${isActive && "text-decoration-underline"}`}>Login</NavLink>
                         </li> */}
                         <li className="nav-item">
-                            <NavLink to="/room-creation" className={({isActive}) => `nav-link text-white ${isActive && "text-decoration-underline"}`}>Room creation</NavLink>
+                            <NavLink to="/room-creation" className={({ isActive }) => `nav-link text-white ${isActive && "text-decoration-underline"}`}>Room creation</NavLink>
                         </li>
                     </ul>
                     <div className="dropdown">
-                        <button 
+                        <button
                             className="btn btn-primary rounded-circle fs-5"
                             type="button"
-                            data-bs-toggle="dropdown"  
+                            data-bs-toggle="dropdown"
                             aria-expanded="false"
                         >
                             D
                         </button>
                         <ul className="dropdown-menu">
                             <li>
-                                <a className="dropdown-item fs-6" href="#">Profile</a>
+                                <a className="dropdown-item fs-6" href="#" onClick={signInSpotify}>Activate Spotify</a>
                             </li>
                             <li>
-                                {/* <a className="dropdown-item fs-6" href="#">Settings</a> */}
-                                <SettingsPage className="dropdown-item fs-6"/>
+                                <Link className="dropdown-item fs-6" to={'/profile'}>Profile</Link>
                             </li>
                             <li>
                                 <a className="dropdown-item fs-6" href="#" onClick={logout}>Logout</a>
                             </li>
+
                         </ul>
                     </div>
                 </div>

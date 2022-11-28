@@ -56,8 +56,40 @@ async function createCredentials(data){
     }
 }
 
+async function updateCredentials(data){
+    try{
+        const response = await axios.put(`${config.apiUrl}/credentials/${data.id}`, data, {
+            headers: {
+                'x-token': localStorage.getItem('token') || '',
+            }
+        })
+        return response.data;
+    }catch(error){
+        console.log(error);
+        return error.response.data;
+    }
+}
+
+
+
+async function getCredentials(){
+    try{
+        const response = await axios.get(`${config.apiUrl}/credentials/`, {
+            headers: {
+                'x-token': localStorage.getItem('token') || '',
+            }
+        })
+        return response.data;
+    }catch(error){
+        console.log(error);
+        return error.response.data;
+    }
+}
+
 export const UserService = {
     getUserInfo,
     createUser,
-    createCredentials
+    createCredentials,
+    getCredentials,
+    updateCredentials
 }
