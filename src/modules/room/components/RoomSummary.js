@@ -54,6 +54,7 @@ const RoomSummary = ({ roomData, genresSelection }) => {
                     <div className="mt-3 d-flex justify-content-center align-items-center bg-light rounded-3 pe-3">
                         <Clipboard title="Room url" valueToCopy={fullUrl}/>
                         <Link
+                        target={"_blank"}
                             to={partUrl}
                             ref={openRoomBtn}
                             data-bs-toggle="tooltip"

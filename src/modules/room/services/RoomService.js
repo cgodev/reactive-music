@@ -10,9 +10,9 @@ const createRoom = async (name, userId, genres, playlistId) => {
         url: `${config.apiUrl}/rooms/save`,
         method: "POST",
         data: JSON.stringify({
-            uid: userId,
             name: name,
             id_playlist: playlistId,
+            spotify_uid: userId,
             token: Cookies.get('token'),
             refresh_token: Cookies.get('refresh_token'),
             genres_seed: genres,

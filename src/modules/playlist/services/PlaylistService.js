@@ -48,7 +48,7 @@ const createPlaylist = async(playlistData) => {
             headers: getHeaders()
         });
 
-        const data = RoomService.createRoom(name, userId, genres, response.data.id);
+        const data = await RoomService.createRoom(name, userId, genres, response.data.id);
         return data;
 
     } catch (error) {

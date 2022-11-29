@@ -14,7 +14,7 @@ const getUserInfo = async () => {
         data = await getData();
     }
 
-    console.log(data);
+    // console.log(data);
     return data;
 }
 

@@ -15,7 +15,7 @@ const RoomForm = () => {
     const {register, handleSubmit, formState: {errors}} = useForm();
     const [genresSelection, setGenresSelection] = useState([]);
     const [qrGenerated, setQrGenerated] = useState(false);
-    const [roomData, setRoomData] = useState({});
+    const [roomData, setRoomData] = useState({ error: null, body: {}, msg: "" });
     const [userData, setUserData] = useState({});
 
     useEffect(() => {
@@ -45,11 +45,14 @@ const RoomForm = () => {
         }
 
         const playListResponse = await PlaylistService.createPlaylist(newRoom);
-        setRoomData(playListResponse);
+        setRoomData({
+            error: Array.isArray(playListResponse.body),
+            ...playListResponse    
+        });
         setQrGenerated(playListResponse.body ? true : false);
         handleModal();
-        console.log("Playlist creation:");
-        console.log(playListResponse.body);
+        // console.log("Playlist creation:");
+        // console.log(playListResponse.body);
     }
 
     const getGenresSelection = (genresPayload) => {
@@ -73,11 +76,14 @@ const RoomForm = () => {
         </div>
         <Modal handleClose={handleModal} isOpen={modalOpen}>
             {
-                qrGenerated && 
-                <RoomSummary
+                !roomData.error
+                ? <RoomSummary
                     roomData={roomData}
                     genresSelection={genresSelection}
                 />
+                : <h2>
+                    {roomData.msg}
+                </h2>
             }
         </Modal>
     </section>
