@@ -7,7 +7,7 @@ const createRoom = async (name, userId, genres, playlistId) => {
     const token = localStorage.getItem("token");
 
     const { data } = await axios({
-        url: `${config.apiUrl}/rooms/save`,
+        url: `${config().apiUrl}/rooms/save`,
         method: "POST",
         data: JSON.stringify({
             name: name,
@@ -31,7 +31,7 @@ const createRoom = async (name, userId, genres, playlistId) => {
 const fetchRoom = async (roomId) => {
     try {
         const { data, status } = await axios({
-            url: `${config.apiUrl}/rooms/${roomId}`,
+            url: `${config().apiUrl}/rooms/${roomId}`,
             method: "GET",
             withCredentials: true
         });

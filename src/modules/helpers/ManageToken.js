@@ -10,7 +10,7 @@ async function refreshToken(user_role, room_id = null, uid = null){
     });
 
     const { data } = await axios({
-        url: config.apiUrl + "/auth/refresh-token?" + params,
+        url: config().apiUrl + "/auth/refresh-token?" + params,
         method: "GET",
         withCredentials: true
     });

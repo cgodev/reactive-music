@@ -32,7 +32,7 @@ async function getData(){
 
 async function createUser(data){
     try {
-        const response = await axios.post(`${config.apiUrl}/users/`, data);
+        const response = await axios.post(`${config().apiUrl}/users/`, data);
         return response.data;
 
     } catch (error) {
@@ -44,7 +44,7 @@ async function createUser(data){
 
 async function createCredentials(data){
     try{
-        const response = await axios.post(`${config.apiUrl}/credentials/`, data, {
+        const response = await axios.post(`${config().apiUrl}/credentials/`, data, {
             headers: {
                 'x-token': localStorage.getItem('token') || '',
             }
@@ -58,7 +58,7 @@ async function createCredentials(data){
 
 async function updateCredentials(data){
     try{
-        const response = await axios.put(`${config.apiUrl}/credentials/${data.id}`, data, {
+        const response = await axios.put(`${config().apiUrl}/credentials/${data.id}`, data, {
             headers: {
                 'x-token': localStorage.getItem('token') || '',
             }
@@ -74,7 +74,7 @@ async function updateCredentials(data){
 
 async function getCredentials(){
     try{
-        const response = await axios.get(`${config.apiUrl}/credentials/`, {
+        const response = await axios.get(`${config().apiUrl}/credentials/`, {
             headers: {
                 'x-token': localStorage.getItem('token') || '',
             }

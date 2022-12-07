@@ -7,7 +7,7 @@ async function signIn() {
         const token = localStorage.getItem("token");
 
         const {data} = await axios({
-            url: `${config.apiUrl}/credentials`,
+            url: `${config().apiUrl}/credentials`,
             method: "GET",
             headers: {
                 "x-token": token
@@ -19,7 +19,7 @@ async function signIn() {
         if (data.ok) {
             console.log(data.credentials);
             const { client_secret, client_id } = data.credentials;
-            window.location.href = `${config.apiUrl}/auth/${client_secret}/${client_id}`;
+            window.location.href = `${config().apiUrl}/auth/${client_secret}/${client_id}`;
         }else{
             Swal.fire('Something went wrong.', `Error: ${data.msg}`, 'error');
         }
@@ -31,7 +31,7 @@ async function signIn() {
 
 const login = async (data) => {
     try {
-        const response = await axios.post(`${config.apiUrl}/auth/`, data);
+        const response = await axios.post(`${config().apiUrl}/auth/`, data);
         return response.data;
 
     } catch (error) {

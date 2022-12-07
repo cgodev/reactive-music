@@ -4,7 +4,7 @@ import axios from 'axios';
 const fetchGenresSeeds = async () => {
     try {
         const { data } = await axios({
-            url: `${config.apiUrl}/genres`,
+            url: `${config().apiUrl}/genres`,
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
