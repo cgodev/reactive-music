@@ -10,10 +10,17 @@ const GenresSearchBar = ({ genresBack, setGenresSeeds }) => {
         new bootstrap.Tooltip(labelSearchGenre.current);
     }, []);
 
-    const handleSearchBar = () => {
-        inputSearchGenre.current.value = "";
-        inputSearchGenre.current.classList.toggle("searchGenre");
-        inputSearchGenre.current.parentNode.classList.toggle("show");
+    const handleSearchBar = () => {  
+        const input = inputSearchGenre.current;
+        const inputContainer = inputSearchGenre.current.parentNode;
+
+        input.value = "";
+        input.classList.toggle("searchGenre");
+        inputContainer.classList.toggle("show");
+
+        if(!input.classList.contains("searchGenre")){
+            setGenresSeeds(genresBack);
+        }
     }
 
     const handleInput = (e) => {
