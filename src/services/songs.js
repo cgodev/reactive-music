@@ -7,7 +7,7 @@ import { config } from "../config/index";
 async function getSongs(){
     try {
         const { data } = await axios({
-            url: config.baseUrl,
+            url: config().baseUrl,
             method: "GET"
         });
 

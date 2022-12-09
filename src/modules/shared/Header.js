@@ -13,8 +13,7 @@ const Header = () => {
 
 
     const signInSpotify = async () => {
-        const result = await AuthService.signIn();
-        console.log(result);
+        await AuthService.signIn();
     }
 
     return (
