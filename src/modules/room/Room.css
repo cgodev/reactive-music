@@ -1,0 +1,48 @@
+.forms-messages-required {
+    color: #dc3545;
+}
+
+.search-container::-webkit-scrollbar,
+.playlist-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.search-container::-webkit-scrollbar-track,
+.playlist-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+.search-container::-webkit-scrollbar-thumb,
+.playlist-content::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+.search-container::-webkit-scrollbar-thumb:hover,
+.playlist-content::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+@media screen and (min-width: 768px) {
+    .qrcode {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .qrcode::before {
+        font-size: 3rem;
+        font-family: "bootstrap-icons";
+        content: "\F30A";
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(245, 245, 245, .8);
+        opacity: 0;
+        transition: .3s all ease-in-out;
+    }
+    .qrcode:hover::before {
+        opacity: 1;
+    }
+}
