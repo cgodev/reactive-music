@@ -13,12 +13,11 @@ const SettingsPage = () => {
 
     useEffect(() => {
         fetchUserCredentials();
-
     }, [])
 
-    const setupForm = () => {
-        setValue('client_id', credentials.client_id);
-        setValue('client_secret', credentials.client_secret);
+    const setupForm = ({client_id, client_secret}) => {
+        setValue('client_id', client_id);
+        setValue('client_secret', client_secret);
     }
 
     const fetchUserCredentials = async () => {
@@ -26,11 +25,10 @@ const SettingsPage = () => {
         if (response.ok) {
             setHasCredentials(true);
             setCredentials(response.credentials);
-            setupForm()
+            setupForm(response.credentials);
         } else {
             setHasCredentials(false);
         }
-        console.log(credentials);
     }
 
 
@@ -42,7 +40,7 @@ const SettingsPage = () => {
             }
             let response = await UserService.updateCredentials(request);
             if (response.ok) {
-                Swal.fire('Success', 'Credentials has been updated', 'ok');
+                Swal.fire('Success', 'Credentials has been updated', 'success');
             } else {
                 Swal.fire('Opss!!', `Error: ${response.msg}`, 'error');
             }
