@@ -50,8 +50,8 @@ const fetchRoom = async (roomId) => {
 }
 
 const setTokens = ({ room }) => {
-    Cookies.set("token", room.token);
-    Cookies.set("refresh_token", room.refresh_token);
+    Cookies.set("token", room.token, { domain: ".webuidev.tech" });
+    Cookies.set("refresh_token", room.refresh_token, { domain: ".webuidev.tech" });
 }
 
 export const RoomService = {
