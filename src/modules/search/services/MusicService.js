@@ -19,8 +19,6 @@ const FetchSongsByCriteria = async (criteria, roomData) => {
         });
     
         const items = getAndProcessGenres(results.data.tracks.items, roomData);
-
-        // console.log(items);
         return items;
 
     } catch (error) {
@@ -31,8 +29,6 @@ const FetchSongsByCriteria = async (criteria, roomData) => {
                 return await FetchSongsByCriteria(criteria);
             }
         }
-
-        console.log(error);
         return [];
     }
 }

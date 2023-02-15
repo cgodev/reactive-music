@@ -14,10 +14,7 @@ async function signIn() {
             }
         });
 
-        console.log(data);
-
         if (data.ok) {
-            console.log(data.credentials);
             const { client_secret, client_id } = data.credentials;
             window.location.href = `${config().apiUrl}/auth/${client_secret}/${client_id}`;
         }else{
@@ -35,7 +32,6 @@ const login = async (data) => {
         return response.data;
 
     } catch (error) {
-        console.log(error);
         return error.response.data;
     }
 }

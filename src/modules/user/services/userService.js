@@ -13,8 +13,6 @@ const getUserInfo = async () => {
         await ManageToken.refreshToken("HOST_ROLE");
         data = await getData();
     }
-
-    // console.log(data);
     return data;
 }
 
@@ -36,7 +34,6 @@ async function createUser(data){
         return response.data;
 
     } catch (error) {
-        console.log(error);
         return error.response.data;
     }
 }
@@ -51,7 +48,6 @@ async function createCredentials(data){
         })
         return response.data;
     }catch(error){
-        console.log(error);
         return error.response.data;
     }
 }
@@ -65,7 +61,6 @@ async function updateCredentials(data){
         })
         return response.data;
     }catch(error){
-        console.log(error);
         return error.response.data;
     }
 }
@@ -81,7 +76,6 @@ async function getCredentials(){
         })
         return response.data;
     }catch(error){
-        console.log(error);
         return error.response.data;
     }
 }

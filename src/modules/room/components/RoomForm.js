@@ -51,8 +51,6 @@ const RoomForm = () => {
         });
         setQrGenerated(playListResponse.body ? true : false);
         handleModal();
-        // console.log("Playlist creation:");
-        // console.log(playListResponse.body);
     }
 
     const getGenresSelection = (genresPayload) => {

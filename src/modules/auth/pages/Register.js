@@ -16,7 +16,6 @@ const Register = () => {
     const navigate = useNavigate();
 
     const onSubmit = async (data) => {
-        console.log(data);
         if (data.password !== data.passwordConfirm) {
             setPasswordCheck(false);
             return;
@@ -34,7 +33,6 @@ const Register = () => {
             })
             
         }else{
-            console.log(response);
             Swal.fire(
                 'Ops!!, something went wrong!',
                 `Error: ${response.msg}`,

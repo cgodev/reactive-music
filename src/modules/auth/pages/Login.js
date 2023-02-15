@@ -22,7 +22,6 @@ const Login = () => {
         const response = await AuthService.login(data);
 
         if(response.ok){
-            console.log(response);
             localStorage.setItem('token', response.token);
             //Remember user email
             data.remember?
@@ -31,7 +30,6 @@ const Login = () => {
                 
             navigate("/profile");
         }else{
-            console.log(response);
             Swal.fire(
                 'Ops!!, something went wrong!',
                 `Error: ${response.msg}`,

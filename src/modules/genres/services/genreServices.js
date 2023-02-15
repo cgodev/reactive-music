@@ -14,7 +14,6 @@ const fetchGenresSeeds = async () => {
         return data.seeds;
 
     } catch (error) {
-        console.log(error);
     }
 }
 

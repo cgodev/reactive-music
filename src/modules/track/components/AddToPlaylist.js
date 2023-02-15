@@ -12,8 +12,7 @@ const AddToPlaylist = ({ trackUri }) => {
 
     const fetchData = async () => {
         const data = await PlaylistService.addToPlaylist(trackUri, roomData);
-        handleButtonText(data); 
-        console.log(data);
+        handleButtonText(data);
     }
 
     const handleButtonText = ({ snapshot_id }) => {

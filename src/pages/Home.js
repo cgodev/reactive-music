@@ -17,7 +17,6 @@ const Home = () => {
                 }
             }
         })
-        console.log(roomId);
         navigate(`/room/${roomId}`)
     }
 

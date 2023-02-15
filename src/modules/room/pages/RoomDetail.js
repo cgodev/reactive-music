@@ -33,7 +33,6 @@ const RoomDetail = () => {
 
     const fetchPlaylist = async (room) => {
         const data = await PlaylistService.fetchPlaylist(room);
-        // console.log("Playlist data", data);
         setRoomData({
             name: room.name,
             roomId: room._id,

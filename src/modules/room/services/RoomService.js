@@ -44,7 +44,6 @@ const fetchRoom = async (roomId) => {
         return data;
 
     } catch (error) {
-        console.log(error);
         return {};
     }
 }
