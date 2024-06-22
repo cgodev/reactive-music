@@ -31,7 +31,7 @@ const RoomForm = () => {
         setModalOpen(!modalOpen);
     }
 
-    const fetchUserData = async() => {
+    const fetchUserData = async () => {
         const userData = await UserService.getUserInfo();
         setUserData(userData);
     }

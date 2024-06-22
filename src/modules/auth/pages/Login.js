@@ -19,7 +19,7 @@ const Login = () => {
     }, [])
 
     const onSubmit = async (data) => {
-        const response = await AuthService.login(data);
+        const response = await AuthService.login(data).catch(console.error);
 
         if(response.ok){
             localStorage.setItem('token', response.token);

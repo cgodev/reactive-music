@@ -7,8 +7,9 @@ import { RoomService } from "../../room/services/RoomService";
 //url:`https://api.spotify.com/v1/playlists/${getPlaylistId()}/tracks/?uris=${trackId}`,
 
 const getHeaders = () => {
+    const ls = localStorage;
     return {
-        "Authorization": `Bearer ${Cookies.get('token').toString() || ''}`,
+        "Authorization": `Bearer ${localStorage.getItem('token').toString() || ''}`,
         "Content-Type": "application/json"
     }
 }
@@ -52,6 +53,7 @@ const createPlaylist = async(playlistData) => {
         return data;
 
     } catch (error) {
+        console.log(error);
         if(error.response.status){
             const { status } = error.response;
 

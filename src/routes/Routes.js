@@ -11,9 +11,7 @@ import Login from "../modules/auth/pages/Login";
 import Register from "../modules/auth/pages/Register";
 import NotFound from "../pages/404";
 import ProfilePage from "../modules/settings/pages/ProfilePage";
-// import { ProtectedRoute } from "./components/PrivateRoute";
 
-//TODO: Playlist y buscador de canciones.
 const Routing = () => {
     return (
         <Router>

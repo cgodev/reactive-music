@@ -6,7 +6,7 @@ const RedirectPage = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        navigate("/room-creation");
+        navigate("/profile");
     }, []);
 
     return (
