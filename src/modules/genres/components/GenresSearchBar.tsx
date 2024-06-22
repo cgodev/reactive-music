@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
 import "../Genres.css";
+import React from "react";
 
 const GenresSearchBar = ({ genresBack, setGenresSeeds }) => {
     const inputSearchGenre = useRef(null);

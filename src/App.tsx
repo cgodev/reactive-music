@@ -1,3 +1,4 @@
+import React from "react";
 import { config } from "./config";
 import Routing from "./routes/Routes";
 import './Styles.css'

@@ -11,6 +11,7 @@ import Login from "../modules/auth/pages/Login";
 import Register from "../modules/auth/pages/Register";
 import NotFound from "../pages/404";
 import ProfilePage from "../modules/settings/pages/ProfilePage";
+import React from "react";
 
 const Routing = () => {
     return (

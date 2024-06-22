@@ -3,7 +3,8 @@ import { genresService } from "../services/genreServices";
 import GenresList from "./GenresList";
 
 import "../Genres.css";
-import GenresSearchBar from "./GenresSearchBar";
+import GenresSearchBar from "./GenresSearchBar.tsx";
+import React from "react";
 
 export const genresContext = createContext();
 

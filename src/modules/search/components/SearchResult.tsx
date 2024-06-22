@@ -1,3 +1,4 @@
+import React from "react";
 import Track from "../../track/components/Track";
 
 const SearchResult = ({ results }) => {

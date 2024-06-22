@@ -8,6 +8,7 @@ import Clipboard from "../../clipboard/components/Clipboard";
 import { QRCodeCanvas } from 'qrcode.react';
 import { generateRoomUrl } from "../../helpers/ManageRoomUrl";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
+import React from "react";
 
 const RoomSummary = ({ roomData, genresSelection }) => {
     const openRoomBtn = useRef(null);

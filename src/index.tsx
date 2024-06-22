@@ -8,7 +8,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 // Bootstrap icons
 import "bootstrap-icons/font/bootstrap-icons.css";
+import React from 'react';
 
-const container = document.querySelector('#root');
+const container: any = document.querySelector('#root');
 const root = createRoot(container);
 root.render(<App/>);

@@ -1,3 +1,4 @@
+import React from 'react';
 import AuthPage from '../modules/auth/pages/AuthPage';
 import Header from '../modules/shared/Header';
 

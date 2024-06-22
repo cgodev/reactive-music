@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import '../Genres.css';
+import React from 'react';
 
 const GenresList = ({genresSeeds = ['search a genre'], addGenre, removeGenre}) => {
     const [genresList, setGenresList] = useState([]);

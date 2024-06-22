@@ -5,6 +5,7 @@ import { MusicService } from "../services/MusicService";
 import { RoomDetailContext } from "../../room/context/RoomDetailContext";
 
 import "./SearchPage.css";
+import React from 'react';
 
 const SearchPage = () => {
     const { roomData } = useContext(RoomDetailContext);

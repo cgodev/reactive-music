@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 
 // Components
 import { UserService } from "../../user/services/userService";
+import React from "react";
 
 const SettingsPage = () => {
     const [hasCredentials, setHasCredentials] = useState(false);

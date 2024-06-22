@@ -3,6 +3,7 @@ import { useState } from "react";
 
 // Service
 import { AuthService } from "../services/AuthService";
+import React from "react";
 
 const Auth = () => {
     const [error, setError] = useState(null);

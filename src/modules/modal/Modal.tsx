@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import Portal from "./Portal";
 import "./Modal.css";
 

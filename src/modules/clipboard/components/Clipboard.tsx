@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 // Packages
 import ClipboardJS from "clipboard";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min";
+import React from "react";
 
 const Clipboard = ({ title, valueToCopy }) => {
     const copyButton = useRef(null);

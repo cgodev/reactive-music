@@ -1,3 +1,4 @@
+import React from "react";
 import AddToPlaylist from "./AddToPlaylist";
 
 const Track = ({ thumbnail = "/assets/images/dummytrack.jpg", name = "no name", author = "no author", genres = ["no genre"], trackUri = "" }) => {
