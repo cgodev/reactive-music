@@ -21,3 +21,12 @@ body, #root{
     width: max-content;
 }
 
+.nav-link {
+    border-radius: 0 !important;
+    color: white !important;
+}
+
+.nav-link.active {
+    border-radius: 0 !important;
+    color: black !important;
+}

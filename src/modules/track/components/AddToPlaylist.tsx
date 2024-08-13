@@ -1,6 +1,6 @@
 import { useRef, useContext } from "react";
 import { PlaylistService } from "../../playlist/services/PlaylistService";
-import { RoomDetailContext } from "../../room/context/RoomDetailContext";
+import { RoomDetailContext } from "../../../feature/room/context/RoomDetailContext";
 import React from "react";
 
 const AddToPlaylist = ({ trackUri }) => {

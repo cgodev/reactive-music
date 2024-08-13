@@ -1,7 +1,7 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 import { ManageToken } from "../../helpers/ManageToken";
-import { RoomService } from "../../room/services/RoomService";
+import { RoomService } from "../../../feature/room/services/RoomService";
+import { v4 as uuidv4 } from 'uuid';
 // import ApiConnector from "../../../helpers/ApiConnector";
 
 //url:`https://api.spotify.com/v1/playlists/${getPlaylistId()}/tracks/?uris=${trackId}`,
@@ -9,7 +9,7 @@ import { RoomService } from "../../room/services/RoomService";
 const getHeaders = () => {
     const ls = localStorage;
     return {
-        "Authorization": `Bearer ${localStorage.getItem('token').toString() || ''}`,
+        "Authorization": `Bearer ${ls.getItem('token')?.toString() || ''}`,
         "Content-Type": "application/json"
     }
 }
@@ -39,17 +39,11 @@ const addToPlaylist = async (trackId, roomData) => {
 
 const createPlaylist = async(playlistData) => {
     const { userId, name, genres } = playlistData;
-    let response = {};
-
+    const uniqueId = uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
+    
     try {
-        response = await axios({
-            url: `https://api.spotify.com/v1/users/${userId}/playlists`,
-            method: "POST",
-            data: JSON.stringify({name}),
-            headers: getHeaders()
-        });
 
-        const data = await RoomService.createRoom(name, userId, genres, response.data.id);
+        const data = await RoomService.createRoom(name, userId, genres, uniqueId);
         return data;
 
     } catch (error) {
